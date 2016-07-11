@@ -1,12 +1,77 @@
 /******************/
 /*Flat UI color set
-Turqouise: #1abc9c;
-Alizarin:#e74c3c;
-Carrot:#e67e22;
-Sun Flower:#f1c40f;
+Turqouise: #1abc9c; green o
+Alizarin:#e74c3c; red x
+Carrot:#e67e22; orange
+Sun Flower:#f1c40f; yellow
 Wet Asphalt:#34495e;
 /******************/
 
 body {
-  background: #34495e;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #fff;
+  /*background: #34495e;*/
+  background:rgba(44, 62, 80,1);
+}
+
+#container {
+  width:350px;
+  /*background: #2c3e50;*/
+  background: rgba(52, 73, 94,1);
+  margin:40px auto;
+  padding-bottom:40px;
+  overflow:auto;
+}
+
+h1 {
+  text-align: left;
+  margin-bottom:0;
+  background:rgba(44, 62, 80,1);
+  width:70%;
+  height:50px;
+  margin-top:28px;
+  font-size:40px;
+  text-transform: uppercase;
+}
+
+.clearfix{
+  clear:both;
+}
+
+#board li{
+  float:left;
+  margin:10px;
+  height:70px;
+  width:70px;
+  font-size:48px;
+  background:#fff;
+  /*color:#bdc3c7;*/
+  color: #f1c40f;
+  list-style:none;
+  text-align:center;
+}
+
+#board li:hover,#reset:hover{
+  cursor:pointer;
+  background:#ecf0f1;
+  color: #e67e22;
+}
+
+#reset{
+  border:0;
+  /*background:#bdc3c7;*/
+  background: #fff;
+  color:#bdc3c7;
+  width:72%;
+  padding:11px;
+}
+
+footer{
+  display:block;
+  text-align:center;
+  padding-top:9px;
+}
+
+button {
+  font-size: 22px;
 }
