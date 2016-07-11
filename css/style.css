@@ -6,18 +6,19 @@ Carrot:#e67e22; orange
 Sun Flower:#f1c40f; yellow
 Wet Asphalt:#34495e;
 /******************/
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #fff;
-  /*background: #34495e;*/
   background:rgba(44, 62, 80,1);
+  font-weight: 700;
 }
 
 #container {
   width:350px;
-  /*background: #2c3e50;*/
   background: rgba(52, 73, 94,1);
+  background: #fff;
   margin:40px auto;
   padding-bottom:40px;
   overflow:auto;
@@ -25,15 +26,15 @@ body {
 }
 
 h1 {
-  text-align: left;
+  text-align: center;
   margin-bottom:0;
-  background:rgba(44, 62, 80,1);
-  width:70%;
-  height:50px;
-  margin-top:28px;
+  background: #f1c40f;
+  margin:0;
   font-size:40px;
-  text-transform: uppercase;
   color: #fff;
+  padding: 55px 20px 7px 20px;
+  font-weight: 400;
+  letter-spacing: -2px;
 }
 
 .clearfix{
@@ -46,39 +47,54 @@ h1 {
   margin:10px;
   height:70px;
   width:70px;
-  font-size:48px;
-  background:#fff;
-  /*color:#bdc3c7;*/
-/*  color: #f1c40f;*/
+  font-size:48px; 
+  background: #ecf0f1;
   list-style:none;
   text-align:center;
 }
 
 .x {
   color: #e74c3c;
+  font-weight: 500;
 }
 
 .o {
-  color: #1abc9c;
+  color: #2ecc71;
+  font-weight: 500;
+}
+
+.arrow-down {
+  width: 0; 
+  height: 0; 
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #f1c40f;
+  font-size: 0;
+  line-height: 0;
+  margin-left: 50%; 
 }
 
 #board li:hover,#reset:hover{
   cursor:pointer;
-  background:#ecf0f1;
+  background: #bdc3c7;
   color: #e67e22;
 }
 
-#board li.x:hover, #board li.o:hover {
-  color: black;
+#board li.x:hover {
+  color: #c0392b;
+}
+
+#board li.o:hover {
+  color: #27ae60;
 }
 
 #reset{
   border:0;
-  /*background:#bdc3c7;*/
-  background: #fff;
-  color:#bdc3c7;
+  background: #ecf0f1;
+  color: #7f8c8d;
   width:72%;
   padding:11px;
+  letter-spacing: -1px;
 }
 
 footer{
