@@ -1,7 +1,9 @@
 $(document).ready(function(){
   var x = "x";
   var o = "o";
+  var spot = $('#board li')
   var turns = 0;
+  
   // Spot vars
   var spot1 = $('#spot1');
   var spot2 = $('#spot2');
@@ -13,84 +15,53 @@ $(document).ready(function(){
   var spot8 = $('#spot8');
   var spot9 = $('#spot9');
   
-  $('#board li').on('click', function(){
-    if(spot1.hasClass('o') && spot2.hasClass('o') && spot3.hasClass('o') ||
-      spot4.hasClass('o') && spot5.hasClass('o') && spot6.hasClass('o') ||
-      spot7.hasClass('o') && spot8.hasClass('o') && spot9.hasClass('o') ||
-      spot1.hasClass('o') && spot4.hasClass('o') && spot7.hasClass('o') ||
-      spot2.hasClass('o') && spot5.hasClass('o') && spot8.hasClass('o') ||
-      spot3.hasClass('o') && spot6.hasClass('o') && spot9.hasClass('o') ||
-      spot1.hasClass('o') && spot5.hasClass('o') && spot9.hasClass('o') ||
-      spot3.hasClass('o') && spot5.hasClass('o') && spot7.hasClass('o')
-    ){
-      alert('Winner: O');
-      $('#board li').text(' ');
-      $('#board li').removeClass('disable');
-      $('#board li').removeClass('o');
-      $('#board li').removeClass('x');
-    } else if(spot1.hasClass('x') && spot2.hasClass('x') && spot3.hasClass('x') ||
-      spot4.hasClass('x') && spot5.hasClass('x') && spot6.hasClass('x') ||
-      spot7.hasClass('x') && spot8.hasClass('x') && spot9.hasClass('x') ||
-      spot1.hasClass('x') && spot4.hasClass('x') && spot7.hasClass('x') ||
-      spot2.hasClass('x') && spot5.hasClass('x') && spot8.hasClass('x') ||
-      spot3.hasClass('x') && spot6.hasClass('x') && spot9.hasClass('x') ||
-      spot1.hasClass('x') && spot5.hasClass('x') && spot9.hasClass('x') ||
-      spot3.hasClass('x') && spot5.hasClass('x') && spot7.hasClass('x')
-    ){
-      alert('Winner: X');
-      $('#board li').text(' ');
-      $('#board li').removeClass('disable');
-      $('#board li').removeClass('o');
-      $('#board li').removeClass('x');
-    } else if(turns == 9){
+  // Click handler = Place x/o on the board per play - checks if theres a winner or if it's a tied game.
+  $('#board li').click(function(){
+    if(turns == 9){
       alert('Tie Game');
-      $('#board li').text('+');
-      $('#board li').removeClass('disable');
-      $('#board li').removeClass('o');
-      $('#board li').removeClass('x');
-      turns = 0;
+      clearBoard(spot);
     } else if($(this).hasClass('disable')){
       alert('This spot is already filled');
     } else if(turns%2 == 0){
-      turns++;
-      $(this).text(o);
-      $(this).addClass('disable o');
-      if(spot1.hasClass('o') && spot2.hasClass('o') && spot3.hasClass('o') ||
-        spot4.hasClass('o') && spot5.hasClass('o') && spot6.hasClass('o') ||
-        spot7.hasClass('o') && spot8.hasClass('o') && spot9.hasClass('o') ||
-        spot1.hasClass('o') && spot4.hasClass('o') && spot7.hasClass('o') ||
-        spot2.hasClass('o') && spot5.hasClass('o') && spot8.hasClass('o') ||
-        spot3.hasClass('o') && spot6.hasClass('o') && spot9.hasClass('o') ||
-        spot1.hasClass('o') && spot5.hasClass('o') && spot9.hasClass('o') ||
-        spot3.hasClass('o') && spot5.hasClass('o') && spot7.hasClass('o')
-      ){
-        alert('Winner: O');
-        turns = 0;
-      }
+      takeTurn(this, o);
     } else {
-      turns++;
-      $(this).text(x);
-      $(this).addClass('disable x');
-      if(spot1.hasClass('x') && spot2.hasClass('x') && spot3.hasClass('x') ||
-        spot4.hasClass('x') && spot5.hasClass('x') && spot6.hasClass('x') ||
-        spot7.hasClass('x') && spot8.hasClass('x') && spot9.hasClass('x') ||
-        spot1.hasClass('x') && spot4.hasClass('x') && spot7.hasClass('x') ||
-        spot2.hasClass('x') && spot5.hasClass('x') && spot8.hasClass('x') ||
-        spot3.hasClass('x') && spot6.hasClass('x') && spot9.hasClass('x') ||
-        spot1.hasClass('x') && spot5.hasClass('x') && spot9.hasClass('x') ||
-        spot3.hasClass('x') && spot5.hasClass('x') && spot7.hasClass('x')
-      ){
-      alert('Winner: X');
-      turns = 0;
-      }
+      takeTurn(this, x);  
     }
   });
-    // Reset Handler
-    $("#reset").click(function(){
-    $("#board li").text(" ");
-    $("#board li").removeClass('disable');
-    $("#board li").removeClass('o');
-    $("#board li").removeClass('x');
-    turns = 0;
+    
+  // Reset button - click handler
+  $("#reset").click(function(){
+    clearBoard(spot);
   });
-});
+
+  // Place an x/o in box on grid clicked on (depending on turn), and then checks if there's a winner.
+  function takeTurn(box, userPlay){
+      turns++;
+      $(box).text(userPlay);
+      $(box).addClass('disable ' + userPlay);
+      checkWinner(userPlay)
+  }
+  // Check to see if any of the combos are met where classes are the same, horizontally, vertically or diagonally in the grid.
+  function checkWinner(turnInput){
+    if(spot1.hasClass(turnInput) && spot2.hasClass(turnInput) && spot3.hasClass(turnInput) ||
+      spot4.hasClass(turnInput) && spot5.hasClass(turnInput) && spot6.hasClass(turnInput) ||
+      spot7.hasClass(turnInput) && spot8.hasClass(turnInput) && spot9.hasClass(turnInput) ||
+      spot1.hasClass(turnInput) && spot4.hasClass(turnInput) && spot7.hasClass(turnInput) ||
+      spot2.hasClass(turnInput) && spot5.hasClass(turnInput) && spot8.hasClass(turnInput) ||
+      spot3.hasClass(turnInput) && spot6.hasClass(turnInput) && spot9.hasClass(turnInput) ||
+      spot1.hasClass(turnInput) && spot5.hasClass(turnInput) && spot9.hasClass(turnInput) ||
+      spot3.hasClass(turnInput) && spot5.hasClass(turnInput) && spot7.hasClass(turnInput) ){
+      alert('Winner: ' + turnInput);
+      clearBoard(spot);
+    }
+  }
+  // Clears the board for a new game - zeros turn counter, removes classes and text from grid.
+  function clearBoard(gridSpace){
+    $(gridSpace).text(' ');
+    $(gridSpace).removeClass('disable');
+    $(gridSpace).removeClass('o');
+    $(gridSpace).removeClass('x');
+    turns = 0;
+  }
+
+}); 
